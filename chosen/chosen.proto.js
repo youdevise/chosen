@@ -55,7 +55,7 @@
             disabled: group_disabled === true ? group_disabled : option.disabled,
             group_array_index: group_position,
             classes: option.className,
-            style: option.style.cssText
+            style: this.readAttr(option, "style")
           });
         } else {
           this.parsed.push({
@@ -66,6 +66,14 @@
         }
         return this.options_index += 1;
       }
+    };
+    SelectParser.prototype.readAttr = function(ele, attr) {
+      var res;
+      res = ele.getAttribute != null ? ele.getAttribute(attr) : ele[attr];
+      if (res) {
+        res.toLowerCase();
+      }
+      return res;
     };
     return SelectParser;
   })();
@@ -153,7 +161,7 @@
         if (option.classes !== "") {
           classes.push(option.classes);
         }
-        style = option.style.cssText !== "" ? " style=\"" + option.style + "\"" : "";
+        style = (option.style != null) && option.style !== "" ? " style=\"" + option.style + ";\"" : "";
         return '<li id="' + option.dom_id + '" class="' + classes.join(' ') + '"' + style + '>' + option.html + '</li>';
       } else {
         return "";

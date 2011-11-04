@@ -35,13 +35,18 @@ class SelectParser
           disabled: if group_disabled is true then group_disabled else option.disabled
           group_array_index: group_position
           classes: option.className
-          style: option.style.cssText
+          style: this.readAttr option, "style"
       else
         @parsed.push
           array_index: @parsed.length
           options_index: @options_index
           empty: true
       @options_index += 1
+
+  readAttr: (ele, attr) ->
+    res = if ele.getAttribute? then ele.getAttribute(attr) else ele[attr]
+    res.toLowerCase() if res
+    return res
 
 SelectParser.select_to_array = (select) ->
   parser = new SelectParser()
