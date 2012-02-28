@@ -131,7 +131,6 @@ Copyright (c) 2011 by Harvest
       this.allow_single_deselect = (this.options.allow_single_deselect != null) && (this.form_field.options[0] != null) && this.form_field.options[0].text === "" ? this.options.allow_single_deselect : false;
       this.disable_search_threshold = this.options.disable_search_threshold || 0;
       this.enable_select_all = (this.options.enable_select_all != null) && this.is_multiple ? this.options.enable_select_all : false;
-      console.log(this.enable_select_all);
       this.choices = 0;
       return this.results_none_found = this.options.no_results_text || "No results match";
     };
